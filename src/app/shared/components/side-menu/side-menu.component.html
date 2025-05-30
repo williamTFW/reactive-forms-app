@@ -1,0 +1,142 @@
+<div class="flex-shrink-0 p-3 bg-white w-100 h-100 text-center">
+  <a
+    href="/"
+    class="d-flex justify-content-center align-items-center text-center p-3 link-dark text-decoration-none"
+  >
+    <span class="fs-5 fw-semibold text-center">Pages Menu</span>
+  </a>
+  <ul class="list-unstyled ps-0 list-group">
+    <li class="mb-1">
+      <div
+        class="d-flex justify-content-center align-items-center list-group-item-action"
+        role="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#home-reactive"
+      >
+        <button
+          class="btn btn-toggle align-items-center rounded collapsed px-0"
+          data-bs-toggle="collapse"
+          data-bs-target="#home-reactive"
+          aria-expanded="true"
+        >
+          Reactive
+        </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          class=""
+        >
+          <path
+            fill="#000"
+            d="M11.475 14.475L7.85 10.85q-.075-.075-.112-.162T7.7 10.5q0-.2.138-.35T8.2 10h7.6q.225 0 .363.15t.137.35q0 .05-.15.35l-3.625 3.625q-.125.125-.25.175T12 14.7t-.275-.05t-.25-.175"
+          />
+        </svg>
+      </div>
+      <div class="collapse" id="home-reactive">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          @for (route of reactiveMenu; track route.title) {
+          <li>
+            <a
+              href="#"
+              class="list-group-item list-group-item-action border border-0"
+              [routerLink]="route.route"
+              routerLinkActive="active"
+              >{{ route.title | titlecase }}</a
+            >
+          </li>
+          }
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <div
+        class="d-flex justify-content-center align-items-center list-group-item-action"
+        role="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#home-signup"
+      >
+        <button
+          class="btn btn-toggle align-items-center rounded collapsed px-0"
+          data-bs-toggle="collapse"
+          data-bs-target="#home-signup"
+          aria-expanded="true"
+        >
+          Login
+        </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          class=""
+        >
+          <path
+            fill="#000"
+            d="M11.475 14.475L7.85 10.85q-.075-.075-.112-.162T7.7 10.5q0-.2.138-.35T8.2 10h7.6q.225 0 .363.15t.137.35q0 .05-.15.35l-3.625 3.625q-.125.125-.25.175T12 14.7t-.275-.05t-.25-.175"
+          />
+        </svg>
+      </div>
+      <div class="collapse" id="home-signup">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          @for (route of authMenu; track route.title) {
+          <li>
+            <a
+              href="#"
+              class="list-group-item list-group-item-action border border-0"
+              [routerLink]="route.route"
+              routerLinkActive="active"
+              >{{ route.title | titlecase }}</a
+            >
+          </li>
+          }
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <div
+        class="d-flex justify-content-center align-items-center list-group-item-action"
+        role="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#home-country"
+      >
+        <button
+          class="btn btn-toggle align-items-center rounded collapsed px-0"
+          data-bs-toggle="collapse"
+          data-bs-target="#home-country"
+          aria-expanded="true"
+        >
+          Country
+        </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          class=""
+        >
+          <path
+            fill="#000"
+            d="M11.475 14.475L7.85 10.85q-.075-.075-.112-.162T7.7 10.5q0-.2.138-.35T8.2 10h7.6q.225 0 .363.15t.137.35q0 .05-.15.35l-3.625 3.625q-.125.125-.25.175T12 14.7t-.275-.05t-.25-.175"
+          />
+        </svg>
+      </div>
+      <div class="collapse" id="home-country">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          @for (route of countryMenu; track route.title) {
+          <li>
+            <a
+              href="#"
+              class="list-group-item list-group-item-action border border-0"
+              [routerLink]="route.route"
+              routerLinkActive="active"
+              >{{ route.title | titlecase }}</a
+            >
+          </li>
+          }
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>

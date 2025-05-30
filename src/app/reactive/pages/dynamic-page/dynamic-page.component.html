@@ -1,0 +1,116 @@
+<h2>Reactivos: <small> Dinámicos </small></h2>
+<hr />
+
+<form autocomplete="off" [formGroup]="myForm">
+  <!-- Nombre -->
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Nombre</label>
+    <div class="col-sm-9">
+      <input
+        class="form-control"
+        placeholder="Nombre de la persona"
+        formControlName="name"
+      />
+      <form-input-msgerror [myForm]="myForm" [controlName]="'name'" />
+    </div>
+  </div>
+
+  <!-- Agregar Favorito -->
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Agregar</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input class="form-control" placeholder="Agregar favorito" />
+
+        <button class="btn btn-outline-primary" type="button">
+          Agregar favorito
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de Juegos Favoritos -->
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Favoritos</label>
+    <div class="col-sm-9" formArrayName="favoriteGames">
+      @for (fGame of favoriteGames.controls; track $index; let i = $index) {
+      <div class="mb-1">
+        <div class="input-group">
+          <input class="form-control" [formControlName]="i" />
+
+          <button class="btn btn-outline-danger" type="button">Eliminar</button>
+        </div>
+        @if (formUtils.isValidFieldInArray(favoriteGames, i)) {
+        <span class="form-text text-danger">
+          {{ formUtils.getFieldErrorInArray(favoriteGames, i) }}
+        </span>
+        }
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button type="submit" class="btn btn-primary float-end">
+        <!-- [disabled]="myForm.invalid" -->
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-5">
+    <ul class="list-group text-light">
+      <li
+        class="list-group-item d-flex justify-content-between bg-secondary text-light"
+      >
+        <span class="border-end w-50">Valid </span>
+        <span>{{ myForm.valid | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between bg-secondary text-light"
+      >
+        <span class="border-end w-50">Pristine </span>
+        <span>{{ myForm.pristine | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between bg-secondary text-light"
+      >
+        <span class="border-end w-50">Touched </span>
+        <span> {{ myForm.touched | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex flex-column justify-content-between bg-secondary text-light"
+      >
+        <span class="">Value </span>
+        <span class="">{{ myForm.value | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex flex-column justify-content-between bg-secondary text-light"
+      >
+        <span class="w-50">Product </span>
+        <span>value: {{ myForm.controls["name"].value | json }}</span>
+        <span
+          ><span class="text-danger-emphasis">Errores:</span>
+          {{ myForm.controls["name"].errors | json }}</span
+        >
+      </li>
+      <li
+        class="list-group-item d-flex flex-column justify-content-between bg-secondary text-light"
+      >
+        <span class="w-50">FavoriteGames </span>
+        <span>value: {{ myForm.controls["favoriteGames"].value | json }}</span>
+        <span
+          ><span class="text-danger-emphasis">Errores:</span>
+          {{ myForm.controls["favoriteGames"].errors | json }}</span
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+
+<span>Agregar Juego</span>
+<!-- <pre>{{ myForm | json }}</pre>
+<pre>{{ myForm | json }}</pre> -->

@@ -1,0 +1,121 @@
+<h2>Reactivos: Básicos</h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <form autocomplete="off" [formGroup]="myForm" (ngSubmit)="onSave()">
+      <!-- Campo de producto -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Producto</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nombre del producto"
+            formControlName="name"
+          />
+
+          <form-input-msgerror [myForm]="myForm" [controlName]="'name'" />
+        </div>
+      </div>
+
+      <!-- Campo de producto -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Precio</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Precio del producto"
+            formControlName="price"
+          />
+          <form-input-msgerror [myForm]="myForm" [controlName]="'price'" />
+        </div>
+      </div>
+
+      <!-- Campo de existencias -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Existencias</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Existencias del producto"
+            formControlName="inStorage"
+          />
+
+          <form-input-msgerror [myForm]="myForm" [controlName]="'name'" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end">
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-5">
+    <ul class="list-group text-light">
+      <li
+        class="list-group-item d-flex justify-content-between bg-secondary text-light"
+      >
+        <span class="border-end w-50">Valid </span>
+        <span>{{ myForm.valid | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between bg-secondary text-light"
+      >
+        <span class="border-end w-50">Pristine </span>
+        <span>{{ myForm.pristine | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between bg-secondary text-light"
+      >
+        <span class="border-end w-50">Touched </span>
+        <span> {{ myForm.touched | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex flex-column justify-content-between bg-secondary text-light"
+      >
+        <span class="">Value </span>
+        <span class="">{{ myForm.value | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex flex-column justify-content-between bg-secondary text-light"
+      >
+        <span class="w-50">Product </span>
+        <span>value: {{ myForm.controls["name"].value | json }}</span>
+        <span
+          ><span class="text-danger-emphasis">Errores:</span>
+          {{ myForm.controls["name"].errors | json }}</span
+        >
+      </li>
+      <li
+        class="list-group-item d-flex flex-column justify-content-between bg-secondary text-light"
+      >
+        <span class="w-50">Price </span>
+        <span>value: {{ myForm.controls["price"].value | json }}</span>
+        <span
+          ><span class="text-danger-emphasis">Errores:</span>
+          {{ myForm.controls["price"].errors | json }}</span
+        >
+      </li>
+      <li
+        class="list-group-item d-flex flex-column justify-content-between bg-secondary text-light"
+      >
+        <span class="w-50">InStorage </span>
+        <span>value: {{ myForm.controls["inStorage"].value | json }}</span>
+        <span
+          ><span class="text-danger-emphasis">Errores:</span>
+          {{ myForm.controls["inStorage"].errors | json }}</span
+        >
+      </li>
+    </ul>
+  </div>
+</div>
