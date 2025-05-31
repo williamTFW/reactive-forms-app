@@ -1,7 +1,7 @@
 <h2>Reactivos: Switches</h2>
 <hr />
 
-<form autocomplete="off">
+<form autocomplete="off" [formGroup]="swithForm" (ngSubmit)="onSubmit()">
   <!-- Radio -->
   <div class="row mb-3">
     <label class="col-sm-3 col-form-label">Género</label>
@@ -12,6 +12,7 @@
           type="radio"
           value="M"
           id="radioMasculino"
+          formControlName="gender"
         />
         <label class="form-check-label" for="radioMasculino"> Masculino </label>
       </div>
@@ -22,6 +23,7 @@
           type="radio"
           value="F"
           id="radioFemenino"
+          formControlName="gender"
         />
         <label class="form-check-label" for="radioFemenino"> Femenino </label>
       </div>
@@ -37,6 +39,7 @@
           class="form-check-input"
           type="checkbox"
           id="flexSwitchCheckChecked"
+          formControlName="wantNotifications"
         />
         <label class="form-check-label" for="flexSwitchCheckChecked"
           >Quiero recibir notificaciones</label
@@ -49,15 +52,27 @@
   <div class="row mb-3">
     <label class="col-sm-3 col-form-label"></label>
     <div class="col-sm-9">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="flexCheckDefault" />
+      <div
+        [class.text-danger]="
+          formUtils.isValidField(swithForm, 'termAndConditions')
+        "
+        class="form-check"
+      >
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="flexCheckDefault"
+          formControlName="termAndConditions"
+        />
         <label class="form-check-label" for="flexCheckDefault">
           Términos y condiciones de uso
         </label>
       </div>
+      @if (formUtils.isValidField(swithForm, "termAndConditions")) {
       <span class="form-text text-danger">
         Debe de aceptar las condiciones de uso
       </span>
+      }
     </div>
   </div>
 
@@ -69,16 +84,72 @@
   </div>
 </form>
 
-<h5>Valor del formulario</h5>
-<pre>{{ "object" | json }}</pre>
-<br />
-
-<h5>Persona</h5>
-<pre>{{ "object" | json }}</pre>
-<br />
-
-<h5>Valid</h5>
-<pre>{{ "object" | json }}</pre>
+<div class="row">
+  <div class="col-5">
+    <ul class="list-group text-light">
+      <li
+        class="list-group-item d-flex justify-content-between bg-secondary text-light"
+      >
+        <span class="border-end w-50">Valid </span>
+        <span>{{ swithForm.valid | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between bg-secondary text-light"
+      >
+        <span class="border-end w-50">Pristine </span>
+        <span>{{ swithForm.pristine | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between bg-secondary text-light"
+      >
+        <span class="border-end w-50">Touched </span>
+        <span> {{ swithForm.touched | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex flex-column justify-content-between bg-secondary text-light"
+      >
+        <span class="">Value </span>
+        <span class="">{{ swithForm.value | json }}</span>
+      </li>
+      <li
+        class="list-group-item d-flex flex-column justify-content-between bg-secondary text-light"
+      >
+        <span class="w-50">Género </span>
+        <span>value: {{ swithForm.controls["gender"].value | json }}</span>
+        <span
+          ><span class="text-danger-emphasis">Errores:</span>
+          {{ swithForm.controls["gender"].errors | json }}</span
+        >
+      </li>
+      <li
+        class="list-group-item d-flex flex-column justify-content-between bg-secondary text-light"
+      >
+        <span class="w-50">wantNotifications </span>
+        <span
+          >value:
+          {{ swithForm.controls["wantNotifications"].value | json }}</span
+        >
+        <span
+          ><span class="text-danger-emphasis">Errores:</span>
+          {{ swithForm.controls["wantNotifications"].errors | json }}</span
+        >
+      </li>
+      <li
+        class="list-group-item d-flex flex-column justify-content-between bg-secondary text-light"
+      >
+        <span class="w-50">termAndConditions </span>
+        <span
+          >value:
+          {{ swithForm.controls["termAndConditions"].value | json }}</span
+        >
+        <span
+          ><span class="text-danger-emphasis">Errores:</span>
+          {{ swithForm.controls["termAndConditions"].errors | json }}</span
+        >
+      </li>
+    </ul>
+  </div>
+</div>
 
 <!-- <h5>Términos</h5> -->
 <!-- <pre>{{ myForm.controls?.terminos?.errors | json }}</pre> -->

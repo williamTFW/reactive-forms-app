@@ -1,4 +1,9 @@
-import { FormArray, FormGroup, ValidationErrors } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+} from '@angular/forms';
 
 export class FormUtils {
   public static getTextError(errors: ValidationErrors) {
@@ -10,6 +15,8 @@ export class FormUtils {
           return `Se requieren Mínimo ${errors['minlength'].requiredLength} caracteres !`;
         case 'min':
           return `El valor minimo es de: ${errors['min'].min}`;
+        case 'email':
+          return `El valor ingresado no es un correo Valido`;
       }
     }
     return null;
@@ -22,6 +29,10 @@ export class FormUtils {
     return (
       !!form.controls[fieldName].errors && form.controls[fieldName].touched
     );
+  }
+
+  public static isValidFieldFormControl(field: FormControl): boolean | null {
+    return !!field.errors && field.touched;
   }
 
   public static isValidFieldInArray(
@@ -39,6 +50,12 @@ export class FormUtils {
   ): string | null {
     if (!form.controls[fieldName]) return null;
     const errors = form.controls[fieldName].errors ?? {};
+    return this.getTextError(errors);
+  }
+
+  public static getFieldErrorFormControl(field: FormControl): string | null {
+    if (!field) return null;
+    const errors = field.errors ?? {};
     return this.getTextError(errors);
   }
 

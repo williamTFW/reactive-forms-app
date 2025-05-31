@@ -1,7 +1,7 @@
 <h2>Reactivos: <small> Dinámicos </small></h2>
 <hr />
 
-<form autocomplete="off" [formGroup]="myForm">
+<form autocomplete="off" [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <!-- Nombre -->
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Nombre</label>
@@ -20,12 +20,26 @@
     <label class="col-sm-3 col-form-label">Agregar</label>
     <div class="col-sm-9">
       <div class="input-group">
-        <input class="form-control" placeholder="Agregar favorito" />
-
-        <button class="btn btn-outline-primary" type="button">
+        <input
+          class="form-control"
+          placeholder="Agregar favorito"
+          [formControl]="newFavoGame"
+          (keydown.enter)="onAddFavorites()"
+          (keydown.enter)="$event.preventDefault()"
+        />
+        <button
+          class="btn btn-outline-primary"
+          type="button"
+          (click)="onAddFavorites()"
+        >
           Agregar favorito
         </button>
       </div>
+      @if (formUtils.isValidFieldFormControl(newFavoGame)) {
+      <span class="form-text text-danger">
+        {{ formUtils.getFieldErrorFormControl(newFavoGame) }}
+      </span>
+      }
     </div>
   </div>
 
@@ -38,7 +52,13 @@
         <div class="input-group">
           <input class="form-control" [formControlName]="i" />
 
-          <button class="btn btn-outline-danger" type="button">Eliminar</button>
+          <button
+            class="btn btn-outline-danger"
+            type="button"
+            (click)="onDeleteFavGame(i)"
+          >
+            Eliminar
+          </button>
         </div>
         @if (formUtils.isValidFieldInArray(favoriteGames, i)) {
         <span class="form-text text-danger">
@@ -47,6 +67,7 @@
         }
       </div>
       }
+      <form-input-msgerror [myForm]="myForm" [controlName]="'favoriteGames'" />
     </div>
   </div>
 
@@ -110,7 +131,3 @@
     </ul>
   </div>
 </div>
-
-<span>Agregar Juego</span>
-<!-- <pre>{{ myForm | json }}</pre>
-<pre>{{ myForm | json }}</pre> -->
