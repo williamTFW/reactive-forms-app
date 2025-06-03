@@ -119,10 +119,11 @@
   </div>
 </div>
 
-<h2>Form Valid:</h2>
-<h2>Form Status:</h2>
-<h2>Form Pending:</h2>
-<h2>Form errors</h2>
+<h2>Form Valid: {{ signUpForm.valid }}</h2>
+<h2>Form Status:{{ signUpForm.status }}</h2>
+<h2>Form Pending: {{ signUpForm.pending }}</h2>
+<h2>Form errors:</h2>
+<pre> {{ signUpForm.errors | json }}</pre>
 
 <div class="row">
   <div class="col-5">

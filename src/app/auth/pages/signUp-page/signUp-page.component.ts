@@ -13,13 +13,42 @@ export class SignUpPageComponent {
   private formBuilder = inject(FormBuilder);
   public formUtils = FormUtils;
 
-  signUpForm = this.formBuilder.group({
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    userName: ['', [Validators.required, Validators.minLength(3)]],
-    password: ['', [Validators.required, Validators.minLength(3)]],
-    password2: ['', Validators.required],
-  });
+  signUpForm = this.formBuilder.group(
+    {
+      name: [
+        '',
+        [Validators.required, Validators.pattern(this.formUtils.namePattern)],
+      ],
+      email: [
+        '',
+        [Validators.required, Validators.pattern(this.formUtils.emailPattern)],
+        [FormUtils.chekingServerResponse],
+      ],
+      userName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern(this.formUtils.notOnlySpacesPattern),
+          FormUtils.notStrider,
+        ],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern(this.formUtils.passwordPattern),
+        ],
+      ],
+      password2: ['', Validators.required],
+    },
+    {
+      validators: [
+        this.formUtils.isFieldOneEqualFieldTwo('password', 'password2'),
+      ],
+    }
+  );
 
   onSubmit() {
     if (this.signUpForm.invalid) {
